@@ -2,6 +2,8 @@
 
 ##### A collection of web experiments designed to explore the use of PoseNet and tensorflow.js to create an artistic relationship between movement and machine. 
 
+Check out the live demos [here](https://googlecreativelab.github.io/posenet-sketchbook/).
+
 These prototypes are the thought starters that kicked off the process of creating [Body, Movement, Language: A.I. Sketches with Bill T. Jones](https://billtjonesai.com), a creative collaboration between The Google Creative Lab and New York Live Arts. Preparing for the first workshop with Bill and the Bill T. Jones/Arnie Zane Company, we wanted to provide examples of the range of interactions that PoseNet can enable, so we experimented with lots of different ways of using the model. This is essentially the raw starter sketchbook that asks: what can you do when you combine movement and machine? 
 
 This is not a library or code repository that intends to evolve. Instead, it is an archive of Body, Movement, Language’s beginnings. You can use this collection of code as a starting point to create your own wacky or wild or just plain useful PoseNet experiments.
