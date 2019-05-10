@@ -2,6 +2,8 @@
 
 ##### A collection of web experiments designed to explore the use of PoseNet and tensorflow.js to create an artistic relationship between movement and machine. 
 
+![PoseNet Sketchbook]()
+
 Check out the live demos [here](https://googlecreativelab.github.io/posenet-sketchbook/).
 
 These prototypes are the thought starters that kicked off the process of creating [Body, Movement, Language: A.I. Sketches with Bill T. Jones](https://billtjonesai.com), a creative collaboration between The Google Creative Lab and New York Live Arts. Preparing for the first workshop with Bill and the Bill T. Jones/Arnie Zane Company, we wanted to provide examples of the range of interactions that PoseNet can enable, so we experimented with lots of different ways of using the model. This is essentially the raw starter sketchbook that asks: what can you do when you combine movement and machine? 
@@ -36,29 +38,56 @@ yarn watch
 The server should be running at **localhost:1234**.
 
 
-## File structure
+### File structure
+All sketches use PoseDetection.js, a wrapper class I created to handle the PoseNet data.
+
+Each individual sketch is hosted in the 'sketches' folder.
+- index.html: 
+- style.css: Styling for the sketch.
+- assets/: The thumbnail, gif, and any additional assets used in the sketch.
+- js/: The soure files.
+    - main.js: Set up the camera, load the video, and initialize Pose Detection and the sketch.
+    - sketch.js: This is where the ~ magic ~ happens. Some functions to note:
+        - setup: Initializes the the canvas width and height.
+        - initSketchGui: Sets up the GUI elements that will affect the sketch and adds them to the GUI structure.
+        - draw: Looping at 60 fps. Renders and updates elements on canvas with each call.
 
 ## The Sketches
 ### Basic
 *How does PoseNet interpret your pose?*
+![Basic Demo Gif]('sketches/basic/assets/Basic.gif')
 
 #### Movement Multiplier
 *How might we allow past motion to linger?*
+![Movement Multiplier Gif]('sketches/movementmultiplier/assets/moving.gif')
+
+#### Text Trailer
+*How might movement history affect text on screen?*
+![Text Trailer Gif]('sketches/texttrailer/assets/moving.gif)
 
 #### Shape Shifter
 *How might movement be translated and abstracted into new forms?*
+![Shape Shifter Gif]('sketches/shapeshifter/assets/moving.gif')
 
-#### Body Collager
-*How can we collage a variety of elements to recreate a figure on screen?*
+#### Collage Creator
+*How might a variety of elements collage to recreate a figure on screen?*
+![Collage Creator Gif]('sketches/collagecreator/assets/moving.gif')
 
-#### Control Slider
-*How can our position manipulate an audiovisual experience?*
+#### Body Trnascriber
+*How might spoken words manifest on screen in relation to the body?*
+![Body Transcriber Gif]('sketches/bodytranscriber/assets/moving.gif')
 
-#### Text Trailer
-*How can movement history affect text on screen?*
+#### Color Mapper
+*How might body poisition be used as a controller?*
+![Color Mapper Gif]('sketches/colormapper/assets/moving.gif')
 
-#### Body Writer
-*How can the words we say manifest on screen in relation to our body?*
+#### Image Mapper
+*How might body position surface and highlight content?*
+![Image Mapper Gif]('sketches/imagemapper/assets/moving.gif')
+
+#### Audio Controller
+*How might body position manipulate an audio experience?*
+![Audio Controller Gif]('sketches/audiocontroller/assets/moving.gif')
 
 ## Contributors
 Built by [Maya Man](https://github.com/mayaman) at the Google Creative Lab.

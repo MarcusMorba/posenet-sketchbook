@@ -46,36 +46,6 @@ class PoseSession {
 
 let sessionPoseIndex = 0;
 
-// Speech recognition stuff
-// var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-// var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-// var SpeechRecognitionEvent =
-//   SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-// var recognition = new SpeechRecognition();
-// recognition.continuous = true;
-// recognition.lang = "en-US";
-// recognition.interimResults = true;
-// recognition.maxAlternatives = 1;
-// recognition.start();
-
-// recognition.onresult = function(event) {
-//   let fullTranscript = "";
-//   for (let r = 0; r < event.results.length; r++) {
-//     fullTranscript += event.results[r][0].transcript;
-//   }
-//   spokenText = fullTranscript;
-//   console.log("spoken text", spokenText);
-// };
-
-// recognition.onstart = function(event) {
-//   console.log("speech recognition STARTED");
-// };
-
-// recognition.onend = function(event) {
-//   console.log("speech recognition ended");
-//   recognition.start();
-// };
-
 const lineWidth = 5;
 const allColors = [];
 

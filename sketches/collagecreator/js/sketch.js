@@ -14,17 +14,6 @@
  * limitations under the License.
  * =============================================================================
  */
-// Keith Haring
-// import head1 from "/assets/bodyparts/head.png";
-// import leftForearm1 from "/assets/bodyparts/leftForearm.png";
-// import leftShin1 from "/assets/bodyparts/leftShin.png";
-// import leftThigh1 from "/assets/bodyparts/leftThigh.png";
-// import leftUpperarm1 from "/assets/bodyparts/leftUpperarm.png";
-// import rightForearm1 from "/assets/bodyparts/rightForearm.png";
-// import rightShin1 from "/assets/bodyparts/rightShin.png";
-// import rightThigh1 from "/assets/bodyparts/rightThigh.png";
-// import rightUpperarm1 from "/assets/bodyparts/rightUpperarm.png";
-// import torso1 from "/assets/bodyparts/torso.png";
 
 // Emojis
 import head0 from '../assets/bodypieces/head/1.png';
@@ -37,18 +26,6 @@ import rightShin0 from '../assets/bodypieces/rightShin/1.png';
 import rightThigh0 from '../assets/bodypieces/rightThigh/1.png';
 import rightUpperarm0 from '../assets/bodypieces/rightUpperarm/1.png';
 import torso0 from '../assets/bodypieces/torso/1.png';
-
-// Moby Dick
-// import head2 from "/assets/bodyparts/head/head-2.png";
-// import leftForearm2 from "/assets/bodyparts/leftForearm/leftForearm-2.png";
-// import leftShin2 from "/assets/bodyparts/leftShin/leftShin-2.png";
-// import leftThigh2 from "/assets/bodyparts/leftThigh/leftThigh-2.png";
-// import leftUpperarm2 from "/assets/bodyparts/leftUpperarm/leftUpperarm-2.png";
-// import rightForearm2 from "/assets/bodyparts/rightForearm/rightForearm-2.png";
-// import rightShin2 from "/assets/bodyparts/rightShin/rightShin-2.png";
-// import rightThigh2 from "/assets/bodyparts/rightThigh/rightThigh-2.png";
-// import rightUpperarm2 from "/assets/bodyparts/rightUpperarm/rightUpperarm-2.png";
-// import torso2 from "/assets/bodyparts/torso/torso-2.png";
 
 let headPaths = [head0];
 let heads = [];

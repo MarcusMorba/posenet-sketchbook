@@ -16,39 +16,20 @@
  */
 
 /**
- * Feeds an image to posenet to estimate poses - this is where the magic
- * happens. This function loops with a requestAnimationFrame method.
+ * Handle pose estimation with PoseNet.
  */
 import * as posenet from "@tensorflow-models/posenet";
+
 export default class PoseDetection {
   constructor(video, mobile) {
     this.video = video;
     this.guiState;
     this.isMobile = mobile;
-    this.algorithm = "single";
-    this.flipHorizontal = true;
-
-    this.smoothFactor = 0.75; // Amount of basic smoothing
+    this.algorithm = "single"; // "single" or "multi"
+    this.flipHorizontal = true; // Flip on the horizontal plane because using front facing webcam
+    this.smoothFactor = 0.75; // Amount of basic smoothing, between 0 - 1
     this.smoothPrevPose;
     this.smoothPrevPoses = [];
-    // Jump detection stuff
-    this.jumpDetection = false; // Whether or not we add jump detection
-
-    // If arms move more than `armspan * maxJumpRatio` in one frame...
-    this.maxJumpRatio = 0.3;
-
-    // ...then we don't allow them to move. This can lead to them getting stuck, so...
-    const jumpResetTime = 1000; // How long before joints that get 'stuck' reset, OG 1000
-    // Set up a jump interval for jump detection
-    this.setUnjumpInterval = this.setUnjumpInterval.bind(this);
-    setInterval(this.setUnjumpInterval, jumpResetTime);
-
-    this.jumpPrevPose;
-    this.jumpPrevPoses = [];
-    this.jumpReset = [];
-    this.jumpResets = [];
-    this.jumpResetPose;
-    this.jumpResetPoses = [];
   }
 
   async initPoseDetection() {
@@ -183,9 +164,6 @@ export default class PoseDetection {
   }
 
   async getPoses() {
-    // since images are being fed from a webcam
-    // const flipHorizontal = true;
-
     if (this.guiState.changeToArchitecture) {
       // Important to purge variables and free up GPU memory
       this.net.dispose();
@@ -227,17 +205,10 @@ export default class PoseDetection {
         break;
     }
 
-    // UHHHH clean this up wtf is going on w these variables
     let newPoses = [];
     for (let p = 0; p < poses.length; p++) {
       let pose = poses[p];
-      let armSpan = this.getDistance(
-        pose.keypoints[9].position,
-        pose.keypoints[10].position
-      );
-      // pose = this.smooth(this.smoothFactor, pose, armSpan);
-      // console.log(armSpan);
-      pose = this.smoothPose(this.smoothFactor, pose, p, armSpan);
+      pose = this.smoothPose(this.smoothFactor, pose, p);
 
       // Add parts mapping
       pose.parts = [];
@@ -260,7 +231,6 @@ export default class PoseDetection {
     return posenet.getBoundingBox(keypoints);
   }
 
-  // Get distance between two position objects
   getDistance(a, b) {
     const distX = a.x - b.x;
     const distY = a.y - b.y;
@@ -285,46 +255,7 @@ export default class PoseDetection {
     return keypoints;
   }
 
-  smooth(smoothFactor, pose, armspan) {
-    // TO DO: investigate this jump stuff
-    // if it starts to feel needed
-    if (this.jumpDetection) {
-      pose = this.unjump(pose, armspan);
-    }
-
-    if (!this.smoothPrevPose) {
-      this.smoothPrevPose = pose;
-      return pose;
-    }
-
-    const keypoints = pose.keypoints;
-    const prevKeypoints = this.smoothPrevPose.keypoints;
-    const smoothKeypoints = keypoints;
-
-    for (let p = 0; p < keypoints.length; p++) {
-      const pos = keypoints[p].position;
-      const prevPos = prevKeypoints[p].position;
-      const smoothPos = smoothKeypoints[p].position;
-
-      smoothPos.x = (prevPos.x - pos.x) * smoothFactor + pos.x;
-      smoothPos.y = (prevPos.y - pos.y) * smoothFactor + pos.y;
-    }
-
-    // Update and return pose
-    let smoothPose = {};
-    smoothPose.keypoints = smoothKeypoints;
-    smoothPose.score = pose.score;
-    this.smoothPrevPose = smoothPose;
-    return smoothPose;
-  }
-
-  smoothPose(smoothFactor, pose, p, armspan) {
-    // TO DO: investigate this jump stuff
-    // if it starts to feel needed
-    if (this.jumpDetection) {
-      pose = this.unjump(pose, p, armspan);
-    }
-
+  smoothPose(smoothFactor, pose, p) {
     if (!this.smoothPrevPoses[p]) {
       this.smoothPrevPoses[p] = pose;
       return pose;
@@ -344,115 +275,10 @@ export default class PoseDetection {
       smoothPos.y = (prevPos.y - pos.y) * smoothFactor + pos.y;
     }
 
-    // Update and return pose
     let smoothPose = {};
     smoothPose.keypoints = smoothKeypoints;
     smoothPose.score = pose.score;
     this.smoothPrevPoses[p] = smoothPose;
     return smoothPose;
-  }
-
-  unjump(pose, p, armspan) {
-    // if (!this.jumpPrevPose) {
-    //   this.jumpPrevPose = pose;
-    //   return pose;
-    // }
-
-    if (!this.jumpPrevPoses[p]) {
-      this.jumpPrevPoses[p] = pose;
-      return pose;
-    }
-
-    // Maximum valid movement distance (smaller = more agressive smoothing)
-    const maxDistance = this.maxJumpRatio * armspan;
-    const smoothedKeypoints = [];
-
-    // Go over each keypoint, see if it's moved an unrealistic amount in one frame,
-    // and if so revert to previous position
-    pose.keypoints.forEach((keypoint) => {
-      const prevKeypoint = this.getKeypoint(
-        this.jumpPrevPoses[p],
-        keypoint.part
-      );
-      const distance = this.getDistance(
-        keypoint.position,
-        prevKeypoint.position
-      );
-
-      if (distance > maxDistance) {
-        smoothedKeypoints.push(prevKeypoint);
-      } else {
-        smoothedKeypoints.push(keypoint);
-      }
-    });
-
-    const originalPose = JSON.parse(JSON.stringify(pose));
-    pose.keypoints = smoothedKeypoints;
-
-    // Reset any parts that have been stuck
-    if (this.jumpResets[p]) {
-      this.jumpResets[p].forEach((part) => {
-        pose.keypoints.forEach((keypoint) => {
-          if (keypoint.part === part) {
-            keypoint.position.x = this.getKeypoint(
-              originalPose,
-              part
-            ).position.x;
-            keypoint.position.y = this.getKeypoint(
-              originalPose,
-              part
-            ).position.y;
-          }
-        });
-        this.jumpReset.splice(this.jumpReset.indexOf(part), 1);
-      });
-    }
-
-    this.jumpPrevPoses[p] = pose;
-    return pose;
-  }
-
-  setUnjumpInterval() {
-    for (let p = 0; p < this.jumpPrevPoses.length; p++) {
-      const prevPose = this.jumpResetPoses[p];
-      const pose = this.jumpPrevPoses[p];
-
-      if (
-        typeof prevPose != "undefined" &&
-        prevPose.keypoints &&
-        typeof pose != "undefined" &&
-        pose.keypoints
-      ) {
-        pose.keypoints.forEach((keypoint) => {
-          const prevKeypoint = this.getKeypoint(prevPose, keypoint.part);
-          const distance = this.getDistance(
-            keypoint.position,
-            prevKeypoint.position
-          );
-
-          if (distance === 0) {
-            if (!this.jumpResets[p]) {
-              this.jumpResets[p] = [];
-            }
-            this.jumpResets[p].push(keypoint.part);
-          }
-        });
-      }
-
-      if (this.jumpPrevPoses[p]) {
-        this.jumpResetPoses[p] = Object.assign({}, this.jumpPrevPoses[p]);
-      }
-    }
-  }
-
-  getBodyOutlinePoints(pose) {
-    // let distanceScale = this.getDistance(pose.parts.leftEye.position, pose.parts.leftEar.position);
-    // return [
-    //   pose.parts.leftEar.position,
-    //   {x: pose.parts.leftEye.position.x, y: pose.parts.leftEye.position.y + distanceScale*2},
-    //   {x: pose.parts.rightEye.position.x, y: pose.parts.rightEye.position.y + distanceScale*2},
-    //   pose.parts.rightEar.position,
-    //   pose.parts.rightShoulder.position,
-    // ]
   }
 }
