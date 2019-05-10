@@ -14,14 +14,14 @@
  * limitations under the License.
  * =============================================================================
  */
-let canvas = document.getElementById("output");
-let ctx = canvas.getContext("2d");
+let canvas = document.getElementById('output');
+let ctx = canvas.getContext('2d');
 let poseDetection;
 let poses = [];
 let video;
 let videoWidth, videoHeight;
 
-const color = "aqua";
+const color = 'aqua';
 const lineWidth = 2;
 
 let sketchGuiState = {
@@ -48,9 +48,9 @@ export function setupSketch(
 
 export function initSketchGui(gui) {
   gui.open();
-  gui.add(sketchGuiState, "showVideo");
-  gui.add(sketchGuiState, "showSkeleton");
-  gui.add(sketchGuiState, "showPoints");
+  gui.add(sketchGuiState, 'showVideo');
+  gui.add(sketchGuiState, 'showSkeleton');
+  gui.add(sketchGuiState, 'showPoints');
 }
 
 let getNewFrame = true;
@@ -64,13 +64,13 @@ async function sketchLoop() {
   let minPartConfidence;
 
   switch (poseDetection.guiState.algorithm) {
-    case "single-pose":
+    case 'single-pose':
       minPoseConfidence = +poseDetection.guiState.singlePoseDetection
         .minPoseConfidence;
       minPartConfidence = +poseDetection.guiState.singlePoseDetection
         .minPartConfidence;
       break;
-    case "multi-pose":
+    case 'multi-pose':
       minPoseConfidence = +poseDetection.guiState.multiPoseDetection
         .minPoseConfidence;
       minPartConfidence = +poseDetection.guiState.multiPoseDetection
@@ -82,7 +82,7 @@ async function sketchLoop() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "black";
+  ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Draw the video on the canvas
@@ -94,7 +94,7 @@ async function sketchLoop() {
     ctx.restore();
   }
 
-  poses.forEach(({ score, keypoints }) => {
+  poses.forEach(({score, keypoints}) => {
     if (score >= minPoseConfidence) {
       if (sketchGuiState.showPoints) {
         drawKeypoints(keypoints, minPartConfidence, ctx);
@@ -110,7 +110,7 @@ async function sketchLoop() {
   requestAnimationFrame(sketchLoop);
 }
 
-function toTuple({ y, x }) {
+function toTuple({y, x}) {
   return [y, x];
 }
 
@@ -142,7 +142,7 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
     minConfidence
   );
 
-  adjacentKeyPoints.forEach(keypoints => {
+  adjacentKeyPoints.forEach((keypoints) => {
     drawSegment(
       toTuple(keypoints[0].position),
       toTuple(keypoints[1].position),
@@ -164,7 +164,7 @@ export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
       continue;
     }
 
-    const { y, x } = keypoint.position;
+    const {y, x} = keypoint.position;
     drawPoint(ctx, y * scale, x * scale, 5, color);
   }
 }
