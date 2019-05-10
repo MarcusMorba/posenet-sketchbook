@@ -59,7 +59,7 @@ Each individual sketch is hosted in the 'sketches' folder.
 
 #### Movement Multiplier
 *How might we allow past motion to linger?*
-![Movement Multiplier Gif]('sketches/movementmultiplier/assets/moving.gif')
+![Movement Multiplier Gif]('https://media.giphy.com/media/8pqAaTAgqjQM8/giphy.gif')
 
 #### Text Trailer
 *How might movement history affect text on screen?*
