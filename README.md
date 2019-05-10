@@ -2,7 +2,8 @@
 
 ##### A collection of web experiments designed to explore the use of PoseNet and tensorflow.js to create an artistic relationship between movement and machine. 
 
-![PoseNet Sketchbook]()
+<img src="landingpage.png" alt="PoseNet Sketchbook" width="500" height="autio">
+
 
 Check out the live demos [here](https://googlecreativelab.github.io/posenet-sketchbook/).
 
@@ -56,43 +57,52 @@ Each individual sketch is hosted in the 'sketches' folder.
 ### Basic
 *How does PoseNet interpret your pose?*
 
-<img src="sketches/basic/assets/moving.gif" alt="basic demo" width="100" height="100">
-
-![Basic Demo Gif](sketches/basic/assets/moving.gif)
+<img src="sketches/basic/assets/moving.gif" alt="basic demo gif" width="400" height="400">
 
 #### Movement Multiplier
 *How might we allow past motion to linger?*
 
-![Movement Multiplier Gif](https://media.giphy.com/media/8pqAaTAgqjQM8/giphy.gif)
+<img src="sketches/movementmultiplier/assets/moving.gif" alt="movement multiplier gif" width="400" height="400">
+
 
 #### Text Trailer
 *How might movement history affect text on screen?*
 
-![Text Trailer Gif](sketches/texttrailer/assets/moving.gif)
+<img src="sketches/texttrailer/assets/moving.gif" alt="text trailer gif" width="400" height="400">
 
 #### Shape Shifter
 *How might movement be translated and abstracted into new forms?*
-![Shape Shifter Gif](sketches/shapeshifter/assets/moving.gif)
+
+<img src="sketches/shapeshifter/assets/moving.gif" alt="shape shifter gif" width="400" height="400">
 
 #### Collage Creator
 *How might a variety of elements collage to recreate a figure on screen?*
-![Collage Creator Gif]('sketches/collagecreator/assets/moving.gif')
+
+<img src="sketches/collagecreator/assets/moving.gif" alt="collage creator gif" width="400" height="400">
+
 
 #### Body Trnascriber
 *How might spoken words manifest on screen in relation to the body?*
-![Body Transcriber Gif]('sketches/bodytranscriber/assets/moving.gif')
+
+<img src="sketches/bodytranscriber/assets/moving.gif" alt="body transcriber gif" width="400" height="400">
 
 #### Color Mapper
 *How might body poisition be used as a controller?*
-![Color Mapper Gif]('sketches/colormapper/assets/moving.gif')
+
+<img src="sketches/colormapper/assets/moving.gif" alt="color mapper gif" width="400" height="400">
+
 
 #### Image Mapper
 *How might body position surface and highlight content?*
-![Image Mapper Gif]('sketches/imagemapper/assets/moving.gif')
+
+<img src="sketches/imagemapper/assets/moving.gif" alt="image mapper gif" width="400" height="400">
+
 
 #### Audio Controller
 *How might body position manipulate an audio experience?*
-![Audio Controller Gif]('sketches/audiocontroller/assets/moving.gif')
+
+<img src="sketches/audiocontroller/assets/moving.gif" alt="audio controller gif" width="400" height="400">
+
 
 ## Contributors
 Built by [Maya Man](https://github.com/mayaman) at the Google Creative Lab.
