@@ -56,21 +56,21 @@ Each individual sketch is hosted in the 'sketches' folder.
 ### Basic
 *How does PoseNet interpret your pose?*
 
-![Basic Demo Gif]('https://github.com/googlecreativelab/posenet-sketchbook/raw/master/sketches/basic/assets/moving.gif')
+![Basic Demo Gif](https://github.com/googlecreativelab/posenet-sketchbook/raw/master/sketches/basic/assets/moving.gif)
 
 #### Movement Multiplier
 *How might we allow past motion to linger?*
 
-![Movement Multiplier Gif]('https://media.giphy.com/media/8pqAaTAgqjQM8/giphy.gif')
+![Movement Multiplier Gif](https://media.giphy.com/media/8pqAaTAgqjQM8/giphy.gif)
 
 #### Text Trailer
 *How might movement history affect text on screen?*
 
-![Text Trailer Gif]('sketches/texttrailer/assets/moving.gif)
+![Text Trailer Gif](sketches/texttrailer/assets/moving.gif)
 
 #### Shape Shifter
 *How might movement be translated and abstracted into new forms?*
-![Shape Shifter Gif]('sketches/shapeshifter/assets/moving.gif')
+![Shape Shifter Gif](sketches/shapeshifter/assets/moving.gif)
 
 #### Collage Creator
 *How might a variety of elements collage to recreate a figure on screen?*
