@@ -56,7 +56,9 @@ Each individual sketch is hosted in the 'sketches' folder.
 ### Basic
 *How does PoseNet interpret your pose?*
 
-![Basic Demo Gif](https://github.com/googlecreativelab/posenet-sketchbook/raw/master/sketches/basic/assets/moving.gif)
+[[ https://github.com/googlecreativelab/posenet-sketchbook/raw/master/sketches/basic/assets/moving.gif | height = 100px ]]
+
+![Basic Demo Gif]()
 
 #### Movement Multiplier
 *How might we allow past motion to linger?*
