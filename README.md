@@ -1,5 +1,5 @@
 
-<img src="header.png" alt="PoseNet Sketchbook" width="800" height="autio">
+<img src="header.png" alt="PoseNet Sketchbook" width="9250" height="autio">
 
 # PoseNet Sketchbook
 
